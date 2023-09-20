@@ -75,6 +75,22 @@ class GestorProductos {
         }
     }
 
+
+    async AddProduct(obj) {
+        try {
+            const Productos = await this.getProducts({})
+            let id
+
+            id = Productos.length ? Productos[Productos.length - 1].id + 1 : 1
+            const ProductoNuevo = { id, ...obj }
+            Productos.push(ProductoNuevo)
+            await fs.promises.writeFile(this.path, JSON.stringify(Productos))
+            return ProductoNuevo
+        } catch (error) {
+            return error
+        }
+    }
+
 }
 
 
