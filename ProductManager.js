@@ -80,7 +80,6 @@ class GestorProductos {
         try {
             const Productos = await this.getProducts({})
             let id
-
             id = Productos.length ? Productos[Productos.length - 1].id + 1 : 1
             const ProductoNuevo = { id, ...obj }
             Productos.push(ProductoNuevo)
