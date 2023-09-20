@@ -16,6 +16,16 @@ class GestorCarrito {
         }
     }
 
+    async GetCartByid(ID) {
+        try {
+            const Carritos = await this.GetCart({})
+            const Cart = Carritos.find((c) => c.id === ID);
+            return Cart
+        } catch (error) {
+            return error
+        }
+    }
+
 }
 // async function test() {
 
