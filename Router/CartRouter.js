@@ -34,9 +34,10 @@ router.post("/", async (req, res) => {
 })
 
 router.post("/:cid/product/:pid", async (req, res) => {
-
+    const IdCarrito = req.params.cid
+    const IdProductoAñadido = req.params.pid
     try {
-
+        
     } catch (error) {
         res.status(500).json({ message: error });
     }

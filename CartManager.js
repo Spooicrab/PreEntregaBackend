@@ -41,14 +41,14 @@ class GestorCarrito {
             return error;
         }
     }
-}
 
-// async function test() {
-//     const ListaCarritos = new GestorCarrito("Cart.json");
-//     let VerPrueba = await ListaCarritos.GetCartByid(1);
-//     // let Prueba = await ListaCarritos.CrearCarrito();
-//     console.log(VerPrueba)
-//     // console.log(Prueba)
-// }
-// test()
+    async UpdateCart() {
+        
+        try {
+
+        } catch (error) {
+
+        }
+    }
+}
 export const CartManager = new GestorCarrito("Cart.json");
