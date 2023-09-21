@@ -34,7 +34,7 @@ class GestorCarrito {
         try {
             const Carritos = await this.GetCarts();
             let id = Carritos.length ? Carritos[Carritos.length - 1].id + 1 : 1;
-            const NuevoCarrito = { id };
+            const NuevoCarrito = { id, Productos: [] };
             Carritos.push(NuevoCarrito);
             await fs.promises.writeFile(this.path, JSON.stringify(Carritos));
         } catch (error) {
@@ -42,13 +42,40 @@ class GestorCarrito {
         }
     }
 
-    async UpdateCart() {
-        
+    async UpdateCart(IdCarrito, IdProductToAdd) {
         try {
-
+            const Carritos = await this.GetCarts();
+            const CarritoModificar = Carritos.find((c) => c.id === IdCarrito);
+            const productoExistente = CarritoModificar.Productos.find(
+                (p) => p.Producto === IdProductToAdd
+            );
+            if (productoExistente) {
+                productoExistente.Quantity += 1;
+            } else {
+                CarritoModificar.Productos.push({
+                    Producto: IdProductToAdd,
+                    Quantity: 1,
+                });
+            }
+            fs.writeFile(this.path, JSON.stringify(CarritoModificar), (err) => {
+                if (err) {
+                    return res.status(500).json({ message: "Error al guardar los cambios" });
+                }
+            });
         } catch (error) {
-
+            return error;
         }
     }
 }
+
+// async function test() {
+
+//     let i = new GestorCarrito("Cart.json")
+//     let prueba = await i.UpdateCart(1, 2)
+//     let prueba2 = await i.UpdateCart(1, 2)
+//     let prueba3 = await i.UpdateCart(1, 3)
+//     console.log(prueba3)
+// }
+
+// test()
 export const CartManager = new GestorCarrito("Cart.json");
