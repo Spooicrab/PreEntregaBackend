@@ -57,25 +57,20 @@ class GestorCarrito {
                     Quantity: 1,
                 });
             }
-            fs.writeFile(this.path, JSON.stringify(CarritoModificar), (err) => {
-                if (err) {
-                    return res.status(500).json({ message: "Error al guardar los cambios" });
-                }
-            });
+            await fs.promises.writeFile(this.path, JSON.stringify(Carritos));
+            return CarritoModificar;
         } catch (error) {
-            return error;
+            console.log(error)
+            throw new Error("Error al actualizar el carrito");
         }
     }
 }
-
 // async function test() {
-
 //     let i = new GestorCarrito("Cart.json")
 //     let prueba = await i.UpdateCart(1, 2)
 //     let prueba2 = await i.UpdateCart(1, 2)
 //     let prueba3 = await i.UpdateCart(1, 3)
 //     console.log(prueba3)
 // }
-
 // test()
 export const CartManager = new GestorCarrito("Cart.json");

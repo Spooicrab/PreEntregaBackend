@@ -34,15 +34,14 @@ router.post("/", async (req, res) => {
 })
 
 router.post("/:cid/product/:pid", async (req, res) => {
-    const IdCarrito = req.params.cid
-    const IdProductoAñadido = req.params.pid
+    const IdCarrito = parseInt(req.params.cid);
+    const IdProductoAñadido = parseInt(req.params.pid);
     try {
-        const Actualizado = await CartManager.UpdateCart(IdCarrito, IdProductoAñadido);
-        return Actualizado ? res.status(200).json("Actualizado") : res.status(400).json({ message: "error" })
+        const Añadido = await CartManager.UpdateCart(IdCarrito, IdProductoAñadido);
+        res.status(200).json({ message: "Añadido", Añadido });
     } catch (error) {
-        res.status(500).json({ message: error });
+        res.status(500).json({ message: error.message });
     }
-})
-
+});
 
 export default router
