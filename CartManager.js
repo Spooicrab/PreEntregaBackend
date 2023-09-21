@@ -30,7 +30,7 @@ class GestorCarrito {
         }
     }
 
-    async CrearCarrito() {
+    async AddCart() {
         try {
             const Carritos = await this.GetCarts();
             let id = Carritos.length ? Carritos[Carritos.length - 1].id + 1 : 1;

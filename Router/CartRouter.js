@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
 })
 
 router.get("/:cid", async (req, res) => {
+
     const { cid } = req.params
     try {
         const Cart = await CartManager.GetCartByid(+cid)
@@ -25,12 +26,11 @@ router.get("/:cid", async (req, res) => {
 router.post("/", async (req, res) => {
 
     try {
-
+        const CarritoNuevo = await CartManager.AddCart();
+        res.status(200).json({ message: "Carrito creado" })
     } catch (error) {
         res.status(500).json({ message: error });
     }
-
-
 })
 
 router.post("/:cid/product/:pid", async (req, res) => {
