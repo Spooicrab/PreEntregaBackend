@@ -5,7 +5,7 @@ const router = Router()
 router.get("/", async (req, res) => {
 
     try {
-        const Carts = await CartManager.GetCart()
+        const Carts = await CartManager.GetCarts()
         res.status(200).json(Carts)
     } catch (error) {
         res.status(500).json({ message: error });
